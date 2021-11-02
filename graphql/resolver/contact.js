@@ -1,9 +1,14 @@
 const Contact = require("../../models/contact");
 const mongoose = require("mongoose");
+const { Auth } = require("../auth");
 
 // create contact
 module.exports = {
   createContact: async function ({ Input }, req) {
+    const token = req.headers.authorization;
+
+    await Auth(token);
+
     const name = Input.name;
     const workPhone = Input.workPhone;
     const mobilePhone = Input.mobilePhone;
@@ -42,6 +47,8 @@ module.exports = {
   listContacts: async function ({ Input }, req) {
     const token = req.headers.authorization;
 
+    await Auth(token);
+
     let options = {};
 
     const page = Input.page;
@@ -65,6 +72,10 @@ module.exports = {
     return [...contacts];
   },
   updateContact: async function ({ Input }, req) {
+    const token = req.headers.authorization;
+
+    await Auth(token);
+
     const id = Input.id;
     const name = Input.name;
     const workPhone = Input.workPhone;
@@ -134,6 +145,10 @@ module.exports = {
     };
   },
   deleteContact: async function ({ Input }, req) {
+    const token = req.headers.authorization;
+
+    await Auth(token);
+
     const id = Input.id;
 
     if (!id || mongoose.isValidObjectId(id) === false) {
