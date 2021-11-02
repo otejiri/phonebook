@@ -15,6 +15,7 @@ Contact Directory
 - express
 - hat
 - express-graphql
+- mongoose
 
 ## Mutations
 
