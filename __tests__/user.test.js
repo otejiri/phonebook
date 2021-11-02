@@ -15,6 +15,7 @@ process.env.NODE_ENV = "test";
 app = require("../app");
 
 before(async () => {
+  //for adding token during tests
   process.env.NODE_TEST_KEY = "test";
   mongoose
     .connect(process.env.MONGODB_URI_TEST)
